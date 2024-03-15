@@ -1,5 +1,5 @@
-package Students;
-import Kurser.Kurser;
+package com.GritAcademyAPI.Students;
+import com.GritAcademyAPI.Courses.Courses;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
@@ -7,7 +7,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import jakarta.persistence.*;
-import lombok.*;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -23,22 +22,27 @@ public class Students {
     @Id
     @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
-    @Column(name = "Fname")
-    private String Fname;
-
+    private Long id;
+    @Column(name = "fName")
+    private String fName;
+    @Column(name = "lName")
+    private String lName;
+    @Column(name = "town")
+    private String town;
+    @Column(name = "hobby")
+    private String hobby;
     @ManyToMany(fetch = FetchType.LAZY, cascade =
             CascadeType.ALL)
 
     @JoinTable(
 
-            name = "Associationstabellen",
+            name = "students_courses",
 
-            joinColumns = @JoinColumn(name = "studentID"),
+            joinColumns = @JoinColumn(name = "students_id"),
 
-            inverseJoinColumns = @JoinColumn(name = "kursID")
+            inverseJoinColumns = @JoinColumn(name = "courses_id")
 
     )
 
-    private Set<Kurser> kurser = new HashSet<>();
+    private Set<Courses> courses = new HashSet<>();
 }

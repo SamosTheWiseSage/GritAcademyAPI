@@ -1,6 +1,6 @@
-package Kurser;
+package com.GritAcademyAPI.Courses;
 
-import Students.Students;
+import com.GritAcademyAPI.Students.Students;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
@@ -8,27 +8,29 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import jakarta.persistence.*;
-import lombok.*;
 
 import java.util.HashSet;
 import java.util.Set;
 
 
-@Entity(name = "kurser")
-@Table(name = "kurser")
+@Entity(name = "courses")
+@Table(name = "courses")
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
 @Setter
-public class Kurser {
+public class Courses {
     @Id
     @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private Long id;
 
-    @Column(name = "namn")
-    private String namn;
-    @ManyToMany(mappedBy = "kurser")
+    @Column(name = "name")
+    private String name;
+
+    @Column(name = "description")
+    private String description;
+    @ManyToMany(mappedBy = "courses")
 
     private Set<Students> students = new HashSet<>();
 
