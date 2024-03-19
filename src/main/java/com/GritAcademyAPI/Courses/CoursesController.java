@@ -24,26 +24,38 @@ public class CoursesController {
         @GetMapping(value = "/courses/{id}/students", produces = MediaType.APPLICATION_JSON_VALUE)
         public ResponseEntity<List<CoursesDTO>> getStudentsToCourses( //CHANGE TO DTO
                         @PathVariable(value = "id") Long id)
-        {
-            return new ResponseEntity<>(coursesService.getCoursesIdToStudents(id),HttpStatus.OK);
+        {List<CoursesDTO>courses = coursesService.getCoursesIdToStudents(id);
+            if (courses.isEmpty()){
+                return new ResponseEntity<>(courses,HttpStatus.NO_CONTENT);
+            }
+            return new ResponseEntity<>(courses,HttpStatus.OK);
         }
     @GetMapping(value = "/courses/name/{name}/students", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<List<CoursesDTO>> getCoursesbyNames(
             @PathVariable(value = "name") String name)
-    {
-        return new ResponseEntity<>(coursesService.getCoursesNameToStudents(name),HttpStatus.OK);
+    {List<CoursesDTO>courses = coursesService.getCoursesNameToStudents(name);
+        if (courses.isEmpty()){
+            return new ResponseEntity<>(courses,HttpStatus.NO_CONTENT);
+        }
+        return new ResponseEntity<>(courses,HttpStatus.OK);
     }
     @GetMapping(value = "/courses/lettername/{name}/students", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<List<CoursesDTO>> getCoursesbyLetter(
             @PathVariable(value = "name") String name)
-    {
-        return new ResponseEntity<>(coursesService.getCoursesbyLetter(name),HttpStatus.OK);
+    {List<CoursesDTO> courses = coursesService.getCoursesbyLetter(name);
+        if (courses.isEmpty()){
+            return new ResponseEntity<>(courses,HttpStatus.NO_CONTENT);
+        }
+        return new ResponseEntity<>(courses,HttpStatus.OK);
     }
     @GetMapping(value = "/courses/desc/{description}/students", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<List<CoursesDTO>> getCoursesbyDesc(
             @PathVariable(value = "description") String description)
-    {
-        return new ResponseEntity<>(coursesService.getCoursesbyDesc(description),HttpStatus.OK);
+    {List<CoursesDTO>courses = coursesService.getCoursesbyDesc(description);
+        if (courses.isEmpty()){
+            return new ResponseEntity<>(courses,HttpStatus.NO_CONTENT);
+        }
+        return new ResponseEntity<>(courses,HttpStatus.OK);
     }
 
 

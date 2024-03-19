@@ -13,17 +13,12 @@ public class StudentsService {
 
     @Autowired
     private StudentsRepository studentsRepository;
-  /*  public List<Students> getKurserForStudents(Long studentID)
-    {
 
-        return studentsRepository.findCoursesByid(studentID);
-
-    }*/
     public List<StudentsDTO> getStudentsByfNames(String fName)
     {
          List<Students> students = studentsRepository.findByfName(fName);
         return students.stream().map(this::mapToDTO).collect(Collectors.toList());
-        //return studentsRepository.findCoursesByid(coursesid);
+
 
     }
     public List<StudentsDTO> getStudentlNames(String lName){
@@ -49,18 +44,14 @@ public class StudentsService {
 
         }
         private StudentsDTO mapToDTO(Students students) {
-
         StudentsDTO dto = new StudentsDTO();
-
         dto.setId(students.getId());
         dto.setFname(students.getFName());
         dto.setLname(students.getLName());
         dto.setTown(students.getTown());
         dto.setHobby(students.getHobby());
       dto.setCoursesDTOS(students.getCourses().stream().map(this::mapToDTO).collect(Collectors.toList()));
-
         return dto;
-
     }
 
     private CoursesDTO mapToDTO(Courses courses) {

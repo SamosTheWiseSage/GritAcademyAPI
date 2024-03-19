@@ -1,5 +1,6 @@
 package com.GritAcademyAPI.Students;
 
+import com.GritAcademyAPI.Courses.CoursesDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -23,25 +24,37 @@ public class StudentsController {
     @GetMapping(value = "/students/fname/{fName}/courses", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<List<StudentsDTO>> getStudentsByfNames(
             @PathVariable(value = "fName") String fName)
-    {
-        return new ResponseEntity<>(studentsService.getStudentsByfNames(fName),HttpStatus.OK);
+    {List<StudentsDTO> students = studentsService.getStudentsByfNames(fName);
+        if (students.isEmpty()){
+            return new ResponseEntity<>(students,HttpStatus.NO_CONTENT);
+        }
+        return new ResponseEntity<>(students,HttpStatus.OK);
     }
     @GetMapping(value = "/students/lname/{lName}/courses", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<List<StudentsDTO>> getStudentlNames(
             @PathVariable(value = "lName") String lName)
-    {
-        return new ResponseEntity<>(studentsService.getStudentlNames(lName),HttpStatus.OK);
+    { List<StudentsDTO> students = studentsService.getStudentlNames(lName);
+        if (students.isEmpty()) {
+            return new ResponseEntity<>(students,HttpStatus.NO_CONTENT);
+        }
+        return new ResponseEntity<>(students, HttpStatus.OK);
     }
     @GetMapping(value = "/students/town/{town}/courses", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<List<StudentsDTO>> getStudentTowns(
-            @PathVariable(value = "town") String town)
-    {
-        return new ResponseEntity<>(studentsService.getStudentTowns(town),HttpStatus.OK);
+            @PathVariable(value = "town") String town) {
+        List<StudentsDTO> students = studentsService.getStudentTowns(town);
+        if (students.isEmpty()) {
+            return new ResponseEntity<>(students,HttpStatus.NO_CONTENT);
+        }
+        return new ResponseEntity<>(students, HttpStatus.OK);
     }
     @GetMapping(value = "/students/{id}/courses",produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<List<StudentsDTO>> getStudentsByID(
             @PathVariable(value = "id") Long id)
-    {
-        return new ResponseEntity<>(studentsService.getStudentByID(id),HttpStatus.OK);
+    { List<StudentsDTO> students = studentsService.getStudentByID(id);
+        if (students.isEmpty()){
+            return new ResponseEntity<>(students,HttpStatus.NO_CONTENT);
+        }
+        return new ResponseEntity<>(students,HttpStatus.OK);
     }
 }
