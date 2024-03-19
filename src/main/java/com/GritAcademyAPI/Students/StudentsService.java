@@ -18,8 +18,6 @@ public class StudentsService {
     {
          List<Students> students = studentsRepository.findByfName(fName);
         return students.stream().map(this::mapToDTO).collect(Collectors.toList());
-
-
     }
     public List<StudentsDTO> getStudentlNames(String lName){
         List<Students> students = studentsRepository.findBylName(lName);
